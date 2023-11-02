@@ -13,6 +13,7 @@ napier = "2.6.1"
 buildConfig = "4.1.1"
 kotlinx-coroutines = "1.7.3"
 ktor = "2.3.5"
+gson = "2.10.1"
 composeIcons = "1.1.0"
 kotlinx-serialization = "1.6.0"
 kotlinx-datetime = "0.4.1"
@@ -23,6 +24,7 @@ multiplatformSettings = "1.0.0"
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-uitooling" }
+ktor-client-cio-jvm = { module = "io.ktor:ktor-client-cio.jvm", version.ref = "ktor" }
 libres = { module = "io.github.skeptick.libres:libres-compose", version.ref = "libres" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 composeImageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "composeImageLoader" }
@@ -36,6 +38,12 @@ composeIcons-featherIcons = { module = "br.com.devsrsouza.compose.icons:feather"
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 multiplatformSettings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
+
+# Added dependencies
+io-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+com-google-code-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+io-ktor-server-default-headers = { module = "io.ktor:ktor-server-default-headers", version.ref = "ktor" }
+io-ktor-ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
 
 [plugins]
 

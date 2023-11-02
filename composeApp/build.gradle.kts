@@ -1,3 +1,5 @@
+
+import org.gradle.internal.impldep.io.opencensus.common.ExperimentalApi
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
@@ -9,8 +11,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    @Suppress("OPT_IN_USAGE")
     targetHierarchy.default()
     androidTarget {
         compilations.all {
@@ -54,6 +56,10 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.multiplatformSettings)
+                implementation(libs.io.ktor.client.content.negotiation)
+                implementation(libs.com.google.code.gson)
+                implementation(libs.io.ktor.ktor.client.serialization)
+
             }
         }
 
