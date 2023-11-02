@@ -1,5 +1,4 @@
 
-import org.gradle.internal.impldep.io.opencensus.common.ExperimentalApi
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
