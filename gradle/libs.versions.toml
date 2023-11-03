@@ -43,7 +43,7 @@ multiplatformSettings = { module = "com.russhwolf:multiplatform-settings", versi
 io-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 com-google-code-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 io-ktor-server-default-headers = { module = "io.ktor:ktor-server-default-headers", version.ref = "ktor" }
-io-ktor-ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
+io-ktor-ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 [plugins]
 

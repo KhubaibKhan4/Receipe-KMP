@@ -11,7 +11,6 @@ plugins {
 }
 
 kotlin {
-    @Suppress("OPT_IN_USAGE")
     targetHierarchy.default()
     androidTarget {
         compilations.all {
@@ -45,6 +44,8 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
                 implementation(libs.libres)
                 implementation(libs.voyager.navigator)
                 implementation(libs.composeImageLoader)
@@ -58,6 +59,8 @@ kotlin {
                 implementation(libs.io.ktor.client.content.negotiation)
                 implementation(libs.com.google.code.gson)
                 implementation(libs.io.ktor.ktor.client.serialization)
+                api("moe.tlaster:precompose:1.5.5")
+                api("moe.tlaster:precompose-viewmodel:1.5.5")
 
             }
         }

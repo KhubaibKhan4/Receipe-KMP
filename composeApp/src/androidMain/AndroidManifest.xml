@@ -4,6 +4,7 @@
     <application
         android:name=".AndroidApp"
         android:icon="@android:drawable/ic_menu_compass"
+        android:usesCleartextTraffic="true"
         android:label="Receipe-KMP"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
