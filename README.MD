@@ -1,7 +1,7 @@
 # Compose Multiplatform Application
 
 ##Screenshots
-<img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/1.png" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/2.png" width="600px" height="600px"/> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/3.png" width="600px" height="600px"/>
+<img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/1.png" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/2.png" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/3.png" />
 
 
 
