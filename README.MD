@@ -1,5 +1,8 @@
 # Compose Multiplatform Application
 
+##Screenshots
+<img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/1.png" width="600px" height="600px"/>
+
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
  - install JDK 17 on your machine
