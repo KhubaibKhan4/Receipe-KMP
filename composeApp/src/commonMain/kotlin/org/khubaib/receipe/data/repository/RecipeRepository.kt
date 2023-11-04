@@ -38,4 +38,14 @@ class RecipeRepository(private val httpClient: HttpClient) {
             emit(DataState.Error(e))
         }
     }
+
+    fun recipeSearch(query: String) = flow {
+        emit(DataState.Loading)
+        try {
+            val result = api.recipeSearch(query)
+            emit(DataState.Success(result.recipes))
+        } catch (e: Exception) {
+            emit(DataState.Error(e))
+        }
+    }
 }

@@ -52,4 +52,12 @@ class AppViewModel(private val httpClient: HttpClient) : ViewModel() {
         }
     }
 
+    fun recipeSearch(query: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            repo.recipeSearch(query).collectLatest {
+                recipesData.value = it
+            }
+        }
+    }
+
 }

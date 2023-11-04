@@ -2,6 +2,7 @@ package org.khubaib.receipe
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,7 +37,6 @@ import io.ktor.client.HttpClient
 import org.khubaib.receipe.data.model.RecipeX
 import org.khubaib.receipe.data.model.Recipes
 import org.khubaib.receipe.data.remote.getRecipes
-import org.khubaib.receipe.data.remote.getSearchRecipes
 import org.khubaib.receipe.theme.AppTheme
 import org.khubaib.receipe.ui.components.RecipeList
 import org.khubaib.receipe.util.RandomViewModel
@@ -52,16 +52,26 @@ internal fun App() = AppTheme {
     var recipeData by remember {
         mutableStateOf(listOf<RecipeX>())
     }
+    var recipeSearchData by remember {
+        mutableStateOf<DataState<Recipes>?>(null)
+    }
+    var search_recipe_Data by remember {
+        mutableStateOf(listOf<RecipeX>())
+    }
     var text by remember {
         mutableStateOf("")
+    }
+
+    var isSearch by remember {
+        mutableStateOf(false)
     }
 
     val appViewModel: RandomViewModel = remember { RandomViewModel(httpClient) }
 
     LaunchedEffect(true) {
         appViewModel.randomRecipes()
+        appViewModel.searchRecipes(text)
         recipeData = getRecipes().recipes!!
-      //  recipeData = getSearchRecipes(text)
 
     }
 
@@ -70,63 +80,103 @@ internal fun App() = AppTheme {
         modifier = Modifier.fillMaxSize()
             .windowInsetsPadding(WindowInsets.safeDrawing)
             .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-      appViewModel.randomRecipe.collectAsState().value.let {
-            when (it) {
-                is DataState.Loading -> {
-                    CircularProgressIndicator()
-                }
-
-                is DataState.Success<Recipes> -> {
-                    TextField(
-                        value = text,
-                        onValueChange = { text = it },
-                        placeholder = {
-                            Text("Search Recipe")
-                        },
-                        trailingIcon = {
-                            IconButton(onClick = {}) {
-                                Image(
-                                    imageVector = Icons.Default.Search,
-                                    contentDescription = null
-                                )
-                            }
-                        },
-                        modifier = Modifier.fillMaxWidth(0.70f)
-                            .clip(shape = RoundedCornerShape(24.dp)),
-                        colors = TextFieldDefaults.colors(
-                            disabledTextColor = Color.Transparent,
-                            focusedIndicatorColor = Color.Transparent,
-                            unfocusedIndicatorColor = Color.Transparent,
-                            disabledIndicatorColor = Color.Transparent
+        Box(modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.TopCenter){
+            TextField(
+                value = text,
+                onValueChange = { text = it },
+                placeholder = {
+                    Text("Search Recipe")
+                },
+                trailingIcon = {
+                    IconButton(onClick = {
+                        appViewModel.searchRecipes(text)
+                        recipeSearchData = appViewModel.searchRecipe.value
+                        isSearch = !isSearch
+                    }) {
+                        Image(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null
                         )
-                    )
-                    RecipeList(recipeData)
-                    Napier.d("${it.data}", tag = "MAIN")
-                    Napier.d("${recipeData}", tag = "MAIN")
-                }
-
-                is DataState.Error -> {
-                    SelectionContainer {
-
-                        Text("${it.exception.message} ${it.exception}")
                     }
-                    Napier.d("${it.exception}", tag = "MAIN")
+                },
+                modifier = Modifier.fillMaxWidth(0.70f)
+                    .clip(shape = RoundedCornerShape(24.dp)),
+                colors = TextFieldDefaults.colors(
+                    disabledTextColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent
+                )
+            )
+
+        }
+
+        if (!isSearch) {
+            appViewModel.randomRecipe.collectAsState().value.let {
+                when (it) {
+                    is DataState.Loading -> {
+                        CircularProgressIndicator()
+                    }
+
+                    is DataState.Success<Recipes> -> {
+                        RecipeList(recipeData)
+                        Napier.d("${it.data}", tag = "MAIN")
+                        Napier.d("${recipeData}", tag = "MAIN")
+                    }
+
+                    is DataState.Error -> {
+                        SelectionContainer {
+
+                            Text("${it.exception.message} ${it.exception}")
+                        }
+                        Napier.d("${it.exception}", tag = "MAIN")
+                    }
+
+                    else -> {
+
+                    }
                 }
+            }
+        } else {
+            recipeSearchData.let {
+                when (it) {
+                    is DataState.Loading -> {
+                        CircularProgressIndicator()
+                    }
 
-                else -> {
+                    is DataState.Success<Recipes> -> {
 
+                        it.data.recipes?.let { it1 -> RecipeList(it1) }
+                        Napier.d("${it.data}", tag = "MAIN")
+                        Napier.d("${recipeData}", tag = "MAIN")
+                    }
+
+                    is DataState.Error -> {
+                        SelectionContainer {
+
+                            Text("${it.exception.message} ${it.exception}")
+                        }
+                        Napier.d("${it.exception}", tag = "MAIN")
+                    }
+
+                    else -> {
+
+                    }
                 }
             }
         }
-
 
     }
 
 }
 
 
+
+
 internal expect fun openUrl(url: String?)
+
+

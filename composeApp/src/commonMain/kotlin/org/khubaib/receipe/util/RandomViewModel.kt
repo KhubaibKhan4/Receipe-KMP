@@ -16,6 +16,7 @@ class RandomViewModel(private val httpClient: HttpClient): ViewModel() {
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
     private val repo = RecipeRepository(httpClient)
     val randomRecipe = MutableStateFlow<DataState<Recipes>?>(DataState.Loading)
+    val searchRecipe = MutableStateFlow<DataState<Recipes>?>(DataState.Loading)
 
 //    fun randomRecipes() {
 //        viewModelScope.launch(Dispatchers.Main) {
@@ -37,6 +38,24 @@ class RandomViewModel(private val httpClient: HttpClient): ViewModel() {
                     }
                     is DataState.Loading -> {
                         randomRecipe.value = DataState.Loading
+                    }
+                }
+            }
+        }
+    }
+
+    fun searchRecipes(query: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            repo.recipeSearch(query).collectLatest {
+                when (it) {
+                    is DataState.Success -> {
+                        searchRecipe.value = DataState.Success(Recipes(it.data))
+                    }
+                    is DataState.Error -> {
+                        searchRecipe.value = DataState.Error(it.exception)
+                    }
+                    is DataState.Loading -> {
+                        searchRecipe.value = DataState.Loading
                     }
                 }
             }

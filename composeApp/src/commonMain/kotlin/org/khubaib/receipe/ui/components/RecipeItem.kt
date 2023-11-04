@@ -1,6 +1,7 @@
 package org.khubaib.receipe.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,22 +13,32 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccessTime
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Kitchen
+import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.seiko.imageloader.rememberImagePainter
 import org.khubaib.receipe.data.model.RecipeX
+import org.khubaib.receipe.openUrl
 
 @Composable
 fun RecipeItem(recipe: RecipeX) {
@@ -43,9 +54,11 @@ fun RecipeItem(recipe: RecipeX) {
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),
-            contentScale = ContentScale.Crop
-        )
+                .height(200.dp)
+                .shadow(elevation = 4.dp, shape = RectangleShape),
+            contentScale = ContentScale.Crop,
+
+            )
 
         Spacer(modifier = Modifier.height(16.dp))
         val htmlRegex = "<.*?>".toRegex()
@@ -99,33 +112,80 @@ fun RecipeItem(recipe: RecipeX) {
 
         Divider(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp))
 
-        Text(
-            text = "Preparation Time: ${recipe.preparationMinutes} minutes",
-            style = MaterialTheme.typography.bodyLarge
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                Icons.Default.AccessTime,
+                contentDescription = "Preparation Time Icon",
+                modifier = Modifier.size(24.dp),
+                tint = Color.Black
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+                text = "Preparation Time: ${recipe.preparationMinutes} minutes",
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = "Cooking Time: ${recipe.cookingMinutes} minutes",
-            style = MaterialTheme.typography.bodyLarge
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                Icons.Default.Kitchen,
+                contentDescription = "Cooking Time Icon",
+                modifier = Modifier.size(24.dp),
+                tint = Color.Black
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+                text = "Cooking Time: ${recipe.cookingMinutes} minutes",
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            text = "Aggregate Likes: ${recipe.aggregateLikes}",
-            style = MaterialTheme.typography.bodyLarge
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                Icons.Default.Favorite,
+                contentDescription = "Likes Icon",
+                modifier = Modifier.size(24.dp),
+                tint = Color.Black
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+                text = "Aggregate Likes: ${recipe.aggregateLikes}",
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp).clickable {
+            openUrl(recipe.sourceUrl)
+        })
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                Icons.Default.OpenInNew,
+                contentDescription = "Url Icon",
+                modifier = Modifier.size(24.dp),
+                tint = Color.Black
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+                text = "Source Link",
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
     }
 }
 
 
 @Composable
 fun RecipeList(recipes: List<RecipeX>) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    val state = rememberLazyListState()
+    LazyColumn(modifier = Modifier.fillMaxSize(),
+        userScrollEnabled = true,
+        state = state) {
         items(recipes) { recipe ->
             RecipeItem(recipe)
         }
     }
+
 }
 
 
