@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.ViewModel
-import org.khubaib.receipe.data.model.RecipeX
 import org.khubaib.receipe.data.model.Recipes
 import org.khubaib.receipe.data.repository.RecipeRepository
 import org.khubaib.receipe.util.network.DataState
@@ -18,13 +17,7 @@ class RandomViewModel(private val httpClient: HttpClient): ViewModel() {
     val randomRecipe = MutableStateFlow<DataState<Recipes>?>(DataState.Loading)
     val searchRecipe = MutableStateFlow<DataState<Recipes>?>(DataState.Loading)
 
-//    fun randomRecipes() {
-//        viewModelScope.launch(Dispatchers.Main) {
-//            repo.recipeRandom().collectLatest {
-//                randomRecipe.value = it
-//            }
-//        }
-//    }
+
 
     fun randomRecipes() {
         viewModelScope.launch(Dispatchers.Main) {

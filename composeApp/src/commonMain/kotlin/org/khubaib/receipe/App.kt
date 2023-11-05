@@ -4,18 +4,23 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -34,10 +39,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
+import io.ktor.util.logging.KtorSimpleLogger
+import io.ktor.util.logging.Logger
 import org.khubaib.receipe.data.model.RecipeX
 import org.khubaib.receipe.data.model.Recipes
 import org.khubaib.receipe.data.remote.getRecipes
 import org.khubaib.receipe.theme.AppTheme
+import org.khubaib.receipe.theme.LocalThemeIsDark
+import org.khubaib.receipe.ui.AppViewModel
 import org.khubaib.receipe.ui.components.RecipeList
 import org.khubaib.receipe.util.RandomViewModel
 import org.khubaib.receipe.util.network.DataState
@@ -67,9 +76,12 @@ internal fun App() = AppTheme {
     }
 
     val appViewModel: RandomViewModel = remember { RandomViewModel(httpClient) }
+    val appViewModels: AppViewModel = remember{ AppViewModel(httpClient) }
 
     LaunchedEffect(true) {
         appViewModel.randomRecipes()
+        appViewModels.recipeRandom()
+        KtorSimpleLogger("MAIN")
         appViewModel.searchRecipes(text)
         recipeData = getRecipes().recipes!!
 
@@ -83,8 +95,31 @@ internal fun App() = AppTheme {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.TopCenter){
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ){
+            var isDark by LocalThemeIsDark.current
+            IconButton(
+                onClick = { isDark = !isDark }
+            ) {
+                Icon(
+                    modifier = Modifier.padding(8.dp).size(20.dp),
+                    imageVector = if (isDark) Icons.Default.LightMode else Icons.Default.DarkMode,
+                    contentDescription = null
+                )
+            }
+
+
+        }
+
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.TopCenter
+        ) {
+
             TextField(
                 value = text,
                 onValueChange = { text = it },
@@ -114,6 +149,7 @@ internal fun App() = AppTheme {
             )
 
         }
+
 
         if (!isSearch) {
             appViewModel.randomRecipe.collectAsState().value.let {
@@ -173,8 +209,6 @@ internal fun App() = AppTheme {
     }
 
 }
-
-
 
 
 internal expect fun openUrl(url: String?)
