@@ -2,7 +2,6 @@ package org.khubaib.receipe
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -19,7 +18,6 @@ import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -27,64 +25,49 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import io.github.aakira.napier.Napier
-import io.ktor.client.HttpClient
-import io.ktor.util.logging.KtorSimpleLogger
-import io.ktor.util.logging.Logger
-import org.khubaib.receipe.data.model.RecipeX
-import org.khubaib.receipe.data.model.Recipes
-import org.khubaib.receipe.data.remote.getRecipes
+import org.khubaib.receipe.repository.Repository
 import org.khubaib.receipe.theme.AppTheme
 import org.khubaib.receipe.theme.LocalThemeIsDark
-import org.khubaib.receipe.ui.AppViewModel
 import org.khubaib.receipe.ui.components.RecipeList
-import org.khubaib.receipe.util.RandomViewModel
-import org.khubaib.receipe.util.network.DataState
+import org.khubaib.receipe.util.RecipeState
+import org.khubaib.receipe.viewmodel.MainViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun App() = AppTheme {
 
-    val httpClient: HttpClient = HttpClient {
-        // configure the HTTP client here if needed
-    }
-    var recipeData by remember {
-        mutableStateOf(listOf<RecipeX>())
-    }
-    var recipeSearchData by remember {
-        mutableStateOf<DataState<Recipes>?>(null)
-    }
-    var search_recipe_Data by remember {
-        mutableStateOf(listOf<RecipeX>())
-    }
+    val scope = rememberCoroutineScope()
     var text by remember {
         mutableStateOf("")
     }
+    var isSearch by remember { mutableStateOf(false) }
+    val repository = Repository()
+    val viewModel = MainViewModel(repository)
 
-    var isSearch by remember {
-        mutableStateOf(false)
+    var recipesState by remember { mutableStateOf<RecipeState>(RecipeState.Loading) }
+
+    LaunchedEffect(Unit) {
+        viewModel.getRandomRecipes()
+
+        viewModel.randomRecipes.collect() {
+            recipesState = it
+        }
     }
+    LaunchedEffect(isSearch) {
+        viewModel.getSearchRecipes(text)
 
-    val appViewModel: RandomViewModel = remember { RandomViewModel(httpClient) }
-    val appViewModels: AppViewModel = remember{ AppViewModel(httpClient) }
-
-    LaunchedEffect(true) {
-        appViewModel.randomRecipes()
-        appViewModels.recipeRandom()
-        KtorSimpleLogger("MAIN")
-        appViewModel.searchRecipes(text)
-        recipeData = getRecipes().recipes!!
-
+        viewModel.searchRecipes.collect() {
+            recipesState = it
+        }
     }
 
 
@@ -99,27 +82,8 @@ internal fun App() = AppTheme {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ){
-            var isDark by LocalThemeIsDark.current
-            IconButton(
-                onClick = { isDark = !isDark }
-            ) {
-                Icon(
-                    modifier = Modifier.padding(8.dp).size(20.dp),
-                    imageVector = if (isDark) Icons.Default.LightMode else Icons.Default.DarkMode,
-                    contentDescription = null
-                )
-            }
-
-
-        }
-
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.TopCenter
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-
             TextField(
                 value = text,
                 onValueChange = { text = it },
@@ -128,8 +92,6 @@ internal fun App() = AppTheme {
                 },
                 trailingIcon = {
                     IconButton(onClick = {
-                        appViewModel.searchRecipes(text)
-                        recipeSearchData = appViewModel.searchRecipe.value
                         isSearch = !isSearch
                     }) {
                         Image(
@@ -147,67 +109,39 @@ internal fun App() = AppTheme {
                     disabledIndicatorColor = Color.Transparent
                 )
             )
-
-        }
-
-
-        if (!isSearch) {
-            appViewModel.randomRecipe.collectAsState().value.let {
-                when (it) {
-                    is DataState.Loading -> {
-                        CircularProgressIndicator()
-                    }
-
-                    is DataState.Success<Recipes> -> {
-                        RecipeList(recipeData)
-                        Napier.d("${it.data}", tag = "MAIN")
-                        Napier.d("${recipeData}", tag = "MAIN")
-                    }
-
-                    is DataState.Error -> {
-                        SelectionContainer {
-
-                            Text("${it.exception.message} ${it.exception}")
-                        }
-                        Napier.d("${it.exception}", tag = "MAIN")
-                    }
-
-                    else -> {
-
-                    }
-                }
-            }
-        } else {
-            recipeSearchData.let {
-                when (it) {
-                    is DataState.Loading -> {
-                        CircularProgressIndicator()
-                    }
-
-                    is DataState.Success<Recipes> -> {
-
-                        it.data.recipes?.let { it1 -> RecipeList(it1) }
-                        Napier.d("${it.data}", tag = "MAIN")
-                        Napier.d("${recipeData}", tag = "MAIN")
-                    }
-
-                    is DataState.Error -> {
-                        SelectionContainer {
-
-                            Text("${it.exception.message} ${it.exception}")
-                        }
-                        Napier.d("${it.exception}", tag = "MAIN")
-                    }
-
-                    else -> {
-
-                    }
-                }
+            var isDark by LocalThemeIsDark.current
+            IconButton(
+                onClick = { isDark = !isDark }
+            ) {
+                Icon(
+                    modifier = Modifier.padding(8.dp).size(20.dp),
+                    imageVector = if (isDark) Icons.Default.LightMode else Icons.Default.DarkMode,
+                    contentDescription = null
+                )
             }
         }
 
+
+        when (recipesState) {
+            is RecipeState.Loading -> {
+                CircularProgressIndicator()
+            }
+
+            is RecipeState.Success -> {
+                val recipes = (recipesState as RecipeState.Success).recipes
+                RecipeList(recipes)
+
+            }
+
+            is RecipeState.Error -> {
+                val error = (recipesState as RecipeState.Error).error
+                SelectionContainer {
+                    Text("Error While Loading Data...$error ")
+
+                }
+            }
+        }
     }
-
 }
 
 

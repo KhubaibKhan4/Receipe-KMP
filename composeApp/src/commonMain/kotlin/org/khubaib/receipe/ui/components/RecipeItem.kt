@@ -14,12 +14,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccessTime
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Kitchen
+import androidx.compose.material.icons.filled.AreaChart
+import androidx.compose.material.icons.filled.Category
+import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material.icons.filled.OpenInNew
+import androidx.compose.material.icons.filled.YoutubeSearchedFor
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -29,7 +29,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -37,18 +36,34 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.seiko.imageloader.rememberImagePainter
-import org.khubaib.receipe.data.model.RecipeX
+import org.khubaib.receipe.data.model.Meal
+import org.khubaib.receipe.data.model.Recipes
 import org.khubaib.receipe.openUrl
 
 @Composable
-fun RecipeItem(recipe: RecipeX) {
+fun RecipeList(recipes: Recipes) {
+    val state = rememberLazyListState()
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        userScrollEnabled = true,
+        state = state
+    ) {
+        items(recipes.meals) { recipe ->
+            RecipeItem(recipe)
+        }
+    }
+
+}
+
+@Composable
+fun RecipeItem(recipe: Meal) {
     Column(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
     ) {
         val painter =
-            rememberImagePainter(url = "https://spoonacular.com/recipeImages/${recipe.image}")
+            rememberImagePainter(url = recipe.strMealThumb!!)
         Image(
             painter = painter,
             contentDescription = null,
@@ -64,64 +79,55 @@ fun RecipeItem(recipe: RecipeX) {
         val htmlRegex = "<.*?>".toRegex()
 
         // Replace HTML tags with an empty string
-        val plainText = recipe.summary!!.replace(htmlRegex, "")
+        val plainText = recipe.strInstructions?.replace(htmlRegex, "")
         Text(
-            text = recipe.title ?: "",
+            text = recipe.strMeal ?: "",
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = plainText,
+            text = plainText!!,
             style = MaterialTheme.typography.bodyLarge,
             color = Color.Gray
         )
         Spacer(modifier = Modifier.height(24.dp))
 
-        for (ingredient in recipe.extendedIngredients) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    val painterIngredient =
-                        rememberImagePainter(url = "https://spoonacular.com/cdn/ingredients_100x100/${ingredient?.image}")
-                    Image(
-                        painter = painterIngredient,
-                        contentDescription = ingredient?.name,
-                        modifier = Modifier
-                            .size(40.dp)
-                            .clip(RoundedCornerShape(4.dp)),
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "Ingredient: ${ingredient?.name}, Amount: ${ingredient?.amount} ${ingredient?.unit}",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-        }
+        Ingredients(ingredients = recipe.strIngredient1, amount = recipe.strMeasure1)
+        Ingredients(ingredients = recipe.strIngredient2, amount = recipe.strMeasure2)
+        Ingredients(ingredients = recipe.strIngredient3, amount = recipe.strMeasure3)
+        Ingredients(ingredients = recipe.strIngredient4, amount = recipe.strMeasure4)
+        Ingredients(ingredients = recipe.strIngredient5, amount = recipe.strMeasure5)
+        Ingredients(ingredients = recipe.strIngredient6, amount = recipe.strMeasure6)
+        Ingredients(ingredients = recipe.strIngredient7, amount = recipe.strMeasure7)
+        Ingredients(ingredients = recipe.strIngredient8, amount = recipe.strMeasure8)
+        Ingredients(ingredients = recipe.strIngredient9, amount = recipe.strMeasure9)
+        Ingredients(ingredients = recipe.strIngredient10, amount = recipe.strMeasure10)
+        Ingredients(ingredients = recipe.strIngredient11, amount = recipe.strMeasure11)
+        Ingredients(ingredients = recipe.strIngredient12, amount = recipe.strMeasure12)
+        Ingredients(ingredients = recipe.strIngredient13, amount = recipe.strMeasure13)
+        Ingredients(ingredients = recipe.strIngredient14, amount = recipe.strMeasure14)
+        Ingredients(ingredients = recipe.strIngredient15, amount = recipe.strMeasure15)
+        recipe?.strIngredient16?.let { recipe?.strMeasure16?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+        recipe.strMeasure17?.let { Ingredients(ingredients = recipe.strIngredient17!!, amount = it) }
+        recipe.strIngredient18?.let { recipe.strMeasure18?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+        recipe.strMeasure19?.let { recipe.strIngredient19?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+        recipe.strIngredient20?.let { recipe.strMeasure20?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+
+
 
         Divider(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp))
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                Icons.Default.AccessTime,
-                contentDescription = "Preparation Time Icon",
+                Icons.Default.ConfirmationNumber,
+                contentDescription = "Mean Id",
                 modifier = Modifier.size(24.dp),
                 tint = Color.Black
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = "Preparation Time: ${recipe.preparationMinutes} minutes",
+                text = "Meal ID: ${recipe.idMeal}",
                 style = MaterialTheme.typography.bodyLarge
             )
         }
@@ -129,14 +135,14 @@ fun RecipeItem(recipe: RecipeX) {
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                Icons.Default.Kitchen,
-                contentDescription = "Cooking Time Icon",
+                Icons.Default.Category,
+                contentDescription = "Meal Category",
                 modifier = Modifier.size(24.dp),
                 tint = Color.Black
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = "Cooking Time: ${recipe.cookingMinutes} minutes",
+                text = "Recipe Category: ${recipe.strCategory}",
                 style = MaterialTheme.typography.bodyLarge
             )
         }
@@ -144,21 +150,22 @@ fun RecipeItem(recipe: RecipeX) {
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                Icons.Default.Favorite,
-                contentDescription = "Likes Icon",
+                Icons.Default.AreaChart,
+                contentDescription = "Area Icon",
                 modifier = Modifier.size(24.dp),
                 tint = Color.Black
             )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = "Aggregate Likes: ${recipe.aggregateLikes}",
+                text = "Country: ${recipe.strArea}",
                 style = MaterialTheme.typography.bodyLarge
             )
         }
-        Spacer(modifier = Modifier.height(8.dp).clickable {
-            openUrl(recipe.sourceUrl)
-        })
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Spacer(modifier = Modifier.height(8.dp))
+        Row(verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickable {
+                openUrl(recipe.strYoutube)
+            }) {
             Icon(
                 Icons.Default.OpenInNew,
                 contentDescription = "Url Icon",
@@ -176,16 +183,27 @@ fun RecipeItem(recipe: RecipeX) {
 
 
 @Composable
-fun RecipeList(recipes: List<RecipeX>) {
-    val state = rememberLazyListState()
-    LazyColumn(modifier = Modifier.fillMaxSize(),
-        userScrollEnabled = true,
-        state = state) {
-        items(recipes) { recipe ->
-            RecipeItem(recipe)
+fun Ingredients(ingredients: String, amount: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = "Ingredient: $ingredients, Amount: $amount",
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
     }
-
+    Spacer(modifier = Modifier.height(8.dp))
 }
 
 
