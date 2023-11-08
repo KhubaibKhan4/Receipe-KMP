@@ -2,6 +2,7 @@ package org.khubaib.receipe
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -124,7 +125,10 @@ internal fun App() = AppTheme {
 
         when (recipesState) {
             is RecipeState.Loading -> {
-                CircularProgressIndicator()
+                Box(modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
             }
 
             is RecipeState.Success -> {
@@ -146,5 +150,4 @@ internal fun App() = AppTheme {
 
 
 internal expect fun openUrl(url: String?)
-
 
