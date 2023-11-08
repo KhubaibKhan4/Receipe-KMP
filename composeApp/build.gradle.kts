@@ -61,6 +61,7 @@ kotlin {
                 implementation(libs.io.ktor.ktor.client.serialization)
                 api("moe.tlaster:precompose:1.5.5")
                 api("moe.tlaster:precompose-viewmodel:1.5.5")
+                implementation("org.jetbrains.skiko:skiko:0.7.84")
 
             }
         }

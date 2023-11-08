@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.jetbrains.skiko.OS
 import org.khubaib.receipe.repository.Repository
 import org.khubaib.receipe.theme.AppTheme
 import org.khubaib.receipe.theme.LocalThemeIsDark
@@ -45,6 +46,7 @@ import org.khubaib.receipe.viewmodel.MainViewModel
 
 @Composable
 internal fun App() = AppTheme {
+
 
     val scope = rememberCoroutineScope()
     var text by remember {
@@ -70,6 +72,8 @@ internal fun App() = AppTheme {
             recipesState = it
         }
     }
+
+
 
 
     Column(

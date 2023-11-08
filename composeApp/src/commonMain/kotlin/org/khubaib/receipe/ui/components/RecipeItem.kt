@@ -44,9 +44,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.seiko.imageloader.rememberImagePainter
+import org.jetbrains.skiko.OS
 import org.khubaib.receipe.data.model.Meal
 import org.khubaib.receipe.data.model.Recipes
 import org.khubaib.receipe.openUrl
+import org.khubaib.receipe.ui.components.desktop.Desktop
 
 @Composable
 fun RecipeList(recipes: Recipes) {
@@ -60,6 +62,11 @@ fun RecipeList(recipes: Recipes) {
             RecipeItem(recipe)
         }
     }
+
+
+//    if (OS.Windows.isWindows) {
+//        Desktop()
+//    }
 
 }
 
@@ -104,7 +111,10 @@ fun RecipeItem(recipe: Meal) {
                 onClick = { extended = !extended },
                 modifier = Modifier.weight(0.1f)
             ) {
-                Icon(imageVector = if (extended) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown, contentDescription = null)
+                Icon(
+                    imageVector = if (extended) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                    contentDescription = null
+                )
             }
 
         }
@@ -132,28 +142,48 @@ fun RecipeItem(recipe: Meal) {
             Ingredients(ingredients = recipe.strIngredient11, amount = recipe.strMeasure11)
             Ingredients(ingredients = recipe.strIngredient12, amount = recipe.strMeasure12)
             Ingredients(ingredients = recipe.strIngredient13, amount = recipe.strMeasure13)
-            if (recipe.strIngredient14.isNullOrEmpty() && recipe.strMeasure14.isNullOrEmpty()){
-                Ingredients(ingredients = recipe.strIngredient14, amount = recipe.strMeasure14)
+            Ingredients(ingredients = recipe.strIngredient14, amount = recipe.strMeasure14)
+            Ingredients(ingredients = recipe.strIngredient15, amount = recipe.strMeasure15)
+            recipe.strIngredient16?.let {
+                recipe.strMeasure16?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
             }
-            if (recipe.strIngredient15.isNullOrEmpty() && recipe.strMeasure15.isNullOrEmpty()){
-                Ingredients(ingredients = recipe.strIngredient15, amount = recipe.strMeasure15)
+            recipe.strIngredient17?.let {
+                recipe.strMeasure17?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
             }
-            if (recipe.strIngredient16.isNullOrEmpty() && recipe.strMeasure16.isNullOrEmpty()){
-            Ingredients(ingredients = recipe.strIngredient16!!, amount = recipe.strMeasure16!!)
+            recipe.strIngredient18?.let {
+                recipe.strMeasure18?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
             }
-            if (recipe.strIngredient17.isNullOrEmpty() && recipe.strMeasure17.isNullOrEmpty()){
-                Ingredients(ingredients = recipe.strIngredient17!!, amount = recipe.strMeasure17!!)
+            recipe.strIngredient19?.let {
+                recipe.strMeasure19?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
             }
-            if (recipe.strIngredient18.isNullOrEmpty() && recipe.strMeasure18.isNullOrEmpty()){
-                Ingredients(ingredients = recipe.strIngredient18!!, amount = recipe.strMeasure18!!)
+            recipe.strMeasure20?.let {
+                recipe.strIngredient20?.let { it1 ->
+                    Ingredients(
+                        ingredients = it1,
+                        amount = it
+                    )
+                }
             }
-            if (recipe.strIngredient19.isNullOrEmpty() && recipe.strMeasure19.isNullOrEmpty()){
-                Ingredients(ingredients = recipe.strIngredient19!!, amount = recipe.strMeasure19!!)
-            }
-            if (recipe.strIngredient20.isNullOrEmpty() && recipe.strMeasure20.isNullOrEmpty()){
-                Ingredients(ingredients = recipe.strIngredient20!!, amount = recipe.strMeasure20!!)
-            }
-
 
 
 
@@ -227,26 +257,29 @@ fun RecipeItem(recipe: Meal) {
 
 @Composable
 fun Ingredients(ingredients: String, amount: String) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
-        Row(
+    if (ingredients.isNotBlank() && amount.isNotBlank()) {
+        Card(
             modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxWidth()
+                .padding(8.dp),
+            elevation = CardDefaults.cardElevation(4.dp)
         ) {
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "Ingredient: $ingredients, Amount: $amount",
-                style = MaterialTheme.typography.bodyLarge
-            )
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Ingredient: $ingredients, Amount: $amount",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
+        Spacer(modifier = Modifier.height(8.dp))
     }
-    Spacer(modifier = Modifier.height(8.dp))
+
 }
 
 
