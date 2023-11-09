@@ -23,17 +23,17 @@ data class Meal(
     @SerialName("strIngredient1")
     val strIngredient1: String,
     @SerialName("strIngredient10")
-    val strIngredient10: String,
+    val strIngredient10: String?,
     @SerialName("strIngredient11")
-    val strIngredient11: String,
+    val strIngredient11: String?,
     @SerialName("strIngredient12")
-    val strIngredient12: String,
+    val strIngredient12: String?,
     @SerialName("strIngredient13")
-    val strIngredient13: String,
+    val strIngredient13: String?,
     @SerialName("strIngredient14")
-    val strIngredient14: String,
+    val strIngredient14: String?,
     @SerialName("strIngredient15")
-    val strIngredient15: String,
+    val strIngredient15: String?,
     @SerialName("strIngredient16")
     val strIngredient16: String?,
     @SerialName("strIngredient17")
@@ -59,7 +59,7 @@ data class Meal(
     @SerialName("strIngredient8")
     val strIngredient8: String,
     @SerialName("strIngredient9")
-    val strIngredient9: String,
+    val strIngredient9: String?,
     @SerialName("strInstructions")
     val strInstructions: String,
     @SerialName("strMeal")

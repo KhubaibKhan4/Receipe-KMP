@@ -44,11 +44,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.seiko.imageloader.rememberImagePainter
-import org.jetbrains.skiko.OS
 import org.khubaib.receipe.data.model.Meal
 import org.khubaib.receipe.data.model.Recipes
 import org.khubaib.receipe.openUrl
-import org.khubaib.receipe.ui.components.desktop.Desktop
 
 @Composable
 fun RecipeList(recipes: Recipes) {
@@ -62,12 +60,6 @@ fun RecipeList(recipes: Recipes) {
             RecipeItem(recipe)
         }
     }
-
-
-//    if (OS.Windows.isWindows) {
-//        Desktop()
-//    }
-
 }
 
 @Composable
@@ -137,13 +129,13 @@ fun RecipeItem(recipe: Meal) {
             Ingredients(ingredients = recipe.strIngredient6, amount = recipe.strMeasure6)
             Ingredients(ingredients = recipe.strIngredient7, amount = recipe.strMeasure7)
             Ingredients(ingredients = recipe.strIngredient8, amount = recipe.strMeasure8)
-            Ingredients(ingredients = recipe.strIngredient9, amount = recipe.strMeasure9)
-            Ingredients(ingredients = recipe.strIngredient10, amount = recipe.strMeasure10)
-            Ingredients(ingredients = recipe.strIngredient11, amount = recipe.strMeasure11)
-            Ingredients(ingredients = recipe.strIngredient12, amount = recipe.strMeasure12)
-            Ingredients(ingredients = recipe.strIngredient13, amount = recipe.strMeasure13)
-            Ingredients(ingredients = recipe.strIngredient14, amount = recipe.strMeasure14)
-            Ingredients(ingredients = recipe.strIngredient15, amount = recipe.strMeasure15)
+            recipe.strIngredient9?.let { Ingredients(ingredients = it, amount = recipe.strMeasure9) }
+            recipe.strIngredient10?.let { Ingredients(ingredients = it, amount = recipe.strMeasure10) }
+            recipe.strIngredient11?.let { Ingredients(ingredients = it, amount = recipe.strMeasure11) }
+            recipe.strIngredient12?.let { Ingredients(ingredients = it, amount = recipe.strMeasure12) }
+            recipe.strIngredient13?.let { Ingredients(ingredients = it, amount = recipe.strMeasure13) }
+            recipe.strIngredient14?.let { Ingredients(ingredients = it, amount = recipe.strMeasure14) }
+            recipe.strIngredient15?.let { Ingredients(ingredients = it, amount = recipe.strMeasure15) }
             recipe.strIngredient16?.let {
                 recipe.strMeasure16?.let { it1 ->
                     Ingredients(
