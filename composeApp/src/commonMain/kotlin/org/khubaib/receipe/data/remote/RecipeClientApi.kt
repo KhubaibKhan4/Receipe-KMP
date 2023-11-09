@@ -11,7 +11,7 @@ import kotlinx.serialization.json.Json
 import org.khubaib.receipe.data.model.Recipes
 
 
-object RecipeClientApi{
+object RecipeClientApi {
     @OptIn(ExperimentalSerializationApi::class)
     val client = HttpClient {
         install(ContentNegotiation) {
@@ -40,6 +40,11 @@ object RecipeClientApi{
     suspend fun getSearchRecipes(query: String): Recipes {
         val url =
             "https://themealdb.com/api/json/v1/1/search.php?s=${query}"
+        return client.get(url).body()
+    }
+
+    suspend fun getCountryRecipes(country: String): Recipes {
+        val url = "https://themealdb.com/api/json/v1/1/filter.php?a=${country}"
         return client.get(url).body()
     }
 

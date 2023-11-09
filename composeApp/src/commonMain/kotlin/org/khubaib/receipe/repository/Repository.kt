@@ -13,4 +13,8 @@ class Repository {
         return RecipeClientApi.getSearchRecipes(query)
     }
 
+    suspend fun getCountryRecipe(country: String): Recipes {
+        return RecipeClientApi.getCountryRecipes(country)
+    }
+
 }

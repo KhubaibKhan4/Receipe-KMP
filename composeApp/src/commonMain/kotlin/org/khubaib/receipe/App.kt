@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -42,6 +44,7 @@ import org.khubaib.receipe.repository.Repository
 import org.khubaib.receipe.theme.AppTheme
 import org.khubaib.receipe.theme.LocalThemeIsDark
 import org.khubaib.receipe.ui.components.RecipeList
+import org.khubaib.receipe.ui.components.TopSlider
 import org.khubaib.receipe.util.RecipeState
 import org.khubaib.receipe.viewmodel.MainViewModel
 
@@ -67,6 +70,7 @@ internal fun App() = AppTheme {
             recipesState = it
         }
     }
+
     LaunchedEffect(isSearch) {
         viewModel.getSearchRecipes(text)
 
@@ -86,7 +90,7 @@ internal fun App() = AppTheme {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        if (OS.Android == OS.Android){
+        if (OS.Android == OS.Android) {
 
             Row(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 3.dp),
@@ -132,6 +136,7 @@ internal fun App() = AppTheme {
         }
 
 
+
         when (recipesState) {
             is RecipeState.Loading -> {
                 Box(
@@ -144,7 +149,16 @@ internal fun App() = AppTheme {
 
             is RecipeState.Success -> {
                 val recipes = (recipesState as RecipeState.Success).recipes
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    TopSlider(recipes, scope)
+                    Spacer(modifier = Modifier.height(8.dp))
                     RecipeList(recipes)
+                }
             }
 
             is RecipeState.Error -> {

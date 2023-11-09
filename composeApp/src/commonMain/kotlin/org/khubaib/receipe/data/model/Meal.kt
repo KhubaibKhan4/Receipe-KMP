@@ -21,7 +21,7 @@ data class Meal(
     @SerialName("strImageSource")
     val strImageSource: String?,
     @SerialName("strIngredient1")
-    val strIngredient1: String,
+    val strIngredient1: String?,
     @SerialName("strIngredient10")
     val strIngredient10: String?,
     @SerialName("strIngredient11")
@@ -43,21 +43,21 @@ data class Meal(
     @SerialName("strIngredient19")
     val strIngredient19: String?,
     @SerialName("strIngredient2")
-    val strIngredient2: String,
+    val strIngredient2: String?,
     @SerialName("strIngredient20")
     val strIngredient20: String?,
     @SerialName("strIngredient3")
-    val strIngredient3: String,
+    val strIngredient3: String?,
     @SerialName("strIngredient4")
-    val strIngredient4: String,
+    val strIngredient4: String?,
     @SerialName("strIngredient5")
-    val strIngredient5: String,
+    val strIngredient5: String?,
     @SerialName("strIngredient6")
-    val strIngredient6: String,
+    val strIngredient6: String?,
     @SerialName("strIngredient7")
-    val strIngredient7: String,
+    val strIngredient7: String?,
     @SerialName("strIngredient8")
-    val strIngredient8: String,
+    val strIngredient8: String?,
     @SerialName("strIngredient9")
     val strIngredient9: String?,
     @SerialName("strInstructions")
@@ -67,19 +67,19 @@ data class Meal(
     @SerialName("strMealThumb")
     val strMealThumb: String,
     @SerialName("strMeasure1")
-    val strMeasure1: String,
+    val strMeasure1: String?,
     @SerialName("strMeasure10")
-    val strMeasure10: String,
+    val strMeasure10: String?,
     @SerialName("strMeasure11")
-    val strMeasure11: String,
+    val strMeasure11: String?,
     @SerialName("strMeasure12")
-    val strMeasure12: String,
+    val strMeasure12: String?,
     @SerialName("strMeasure13")
-    val strMeasure13: String,
+    val strMeasure13: String?,
     @SerialName("strMeasure14")
-    val strMeasure14: String,
+    val strMeasure14: String?,
     @SerialName("strMeasure15")
-    val strMeasure15: String,
+    val strMeasure15: String?,
     @SerialName("strMeasure16")
     val strMeasure16: String?,
     @SerialName("strMeasure17")
@@ -89,23 +89,23 @@ data class Meal(
     @SerialName("strMeasure19")
     val strMeasure19: String?,
     @SerialName("strMeasure2")
-    val strMeasure2: String,
+    val strMeasure2: String?,
     @SerialName("strMeasure20")
     val strMeasure20: String?,
     @SerialName("strMeasure3")
-    val strMeasure3: String,
+    val strMeasure3: String?,
     @SerialName("strMeasure4")
-    val strMeasure4: String,
+    val strMeasure4: String?,
     @SerialName("strMeasure5")
-    val strMeasure5: String,
+    val strMeasure5: String?,
     @SerialName("strMeasure6")
-    val strMeasure6: String,
+    val strMeasure6: String?,
     @SerialName("strMeasure7")
-    val strMeasure7: String,
+    val strMeasure7: String?,
     @SerialName("strMeasure8")
-    val strMeasure8: String,
+    val strMeasure8: String?,
     @SerialName("strMeasure9")
-    val strMeasure9: String,
+    val strMeasure9: String?,
     @SerialName("strSource")
     val strSource: String?,
     @SerialName("strTags")

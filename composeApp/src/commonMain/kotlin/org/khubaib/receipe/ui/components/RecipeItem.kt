@@ -121,21 +121,21 @@ fun RecipeItem(recipe: Meal) {
         if (extended) {
             Spacer(modifier = Modifier.height(24.dp))
 
-            Ingredients(ingredients = recipe.strIngredient1, amount = recipe.strMeasure1)
-            Ingredients(ingredients = recipe.strIngredient2, amount = recipe.strMeasure2)
-            Ingredients(ingredients = recipe.strIngredient3, amount = recipe.strMeasure3)
-            Ingredients(ingredients = recipe.strIngredient4, amount = recipe.strMeasure4)
-            Ingredients(ingredients = recipe.strIngredient5, amount = recipe.strMeasure5)
-            Ingredients(ingredients = recipe.strIngredient6, amount = recipe.strMeasure6)
-            Ingredients(ingredients = recipe.strIngredient7, amount = recipe.strMeasure7)
-            Ingredients(ingredients = recipe.strIngredient8, amount = recipe.strMeasure8)
-            recipe.strIngredient9?.let { Ingredients(ingredients = it, amount = recipe.strMeasure9) }
-            recipe.strIngredient10?.let { Ingredients(ingredients = it, amount = recipe.strMeasure10) }
-            recipe.strIngredient11?.let { Ingredients(ingredients = it, amount = recipe.strMeasure11) }
-            recipe.strIngredient12?.let { Ingredients(ingredients = it, amount = recipe.strMeasure12) }
-            recipe.strIngredient13?.let { Ingredients(ingredients = it, amount = recipe.strMeasure13) }
-            recipe.strIngredient14?.let { Ingredients(ingredients = it, amount = recipe.strMeasure14) }
-            recipe.strIngredient15?.let { Ingredients(ingredients = it, amount = recipe.strMeasure15) }
+            recipe.strIngredient1?.let { recipe.strMeasure1?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strIngredient2?.let { recipe.strMeasure2?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strMeasure3?.let { recipe.strIngredient3?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+            recipe.strIngredient4?.let { recipe.strMeasure4?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strMeasure5?.let { recipe.strIngredient5?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+            recipe.strMeasure6?.let { recipe.strIngredient6?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+            recipe.strIngredient7?.let { recipe.strMeasure7?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strMeasure8?.let { recipe.strIngredient8?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+            recipe.strIngredient9?.let { recipe.strMeasure9?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strIngredient10?.let { recipe.strMeasure10?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strIngredient11?.let { recipe.strMeasure11?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strIngredient12?.let { recipe.strMeasure12?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strIngredient13?.let { recipe.strMeasure13?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strIngredient14?.let { recipe.strMeasure14?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strIngredient15?.let { recipe.strMeasure15?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
             recipe.strIngredient16?.let {
                 recipe.strMeasure16?.let { it1 ->
                     Ingredients(

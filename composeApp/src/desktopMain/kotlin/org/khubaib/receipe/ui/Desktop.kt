@@ -303,55 +303,69 @@ fun RightPanel(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Ingredients(ingredients = meal.strIngredient1, amount = meal.strMeasure1)
-                Ingredients(ingredients = meal.strIngredient2, amount = meal.strMeasure2)
-                Ingredients(ingredients = meal.strIngredient3, amount = meal.strMeasure3)
-                Ingredients(ingredients = meal.strIngredient4, amount = meal.strMeasure4)
-                Ingredients(ingredients = meal.strIngredient5, amount = meal.strMeasure5)
-                Ingredients(ingredients = meal.strIngredient6, amount = meal.strMeasure6)
-                Ingredients(ingredients = meal.strIngredient7, amount = meal.strMeasure7)
-                Ingredients(ingredients = meal.strIngredient8, amount = meal.strMeasure8)
+                meal?.strMeasure1?.let { meal?.strIngredient1?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+                meal?.strIngredient2?.let { meal.strMeasure2?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+                meal.strMeasure3?.let { meal.strIngredient3?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+                meal.strIngredient4?.let { meal.strMeasure4?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+                meal.strMeasure5?.let { meal.strIngredient5?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+                meal.strIngredient6?.let { meal.strMeasure6?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+                meal.strIngredient7?.let { meal.strMeasure7?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+                meal.strMeasure8?.let { meal.strIngredient8?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
                 meal.strIngredient9?.let {
-                    Ingredients(
-                        ingredients = it,
-                        amount = meal.strMeasure9
-                    )
+                    meal.strMeasure9?.let { it1 ->
+                        Ingredients(
+                            ingredients = it,
+                            amount = it1
+                        )
+                    }
                 }
                 meal.strIngredient10?.let {
-                    Ingredients(
-                        ingredients = it,
-                        amount = meal.strMeasure10
-                    )
+                    meal.strMeasure10?.let { it1 ->
+                        Ingredients(
+                            ingredients = it,
+                            amount = it1
+                        )
+                    }
                 }
                 meal.strIngredient11?.let {
-                    Ingredients(
-                        ingredients = it,
-                        amount = meal.strMeasure11
-                    )
+                    meal.strMeasure11?.let { it1 ->
+                        Ingredients(
+                            ingredients = it,
+                            amount = it1
+                        )
+                    }
                 }
                 meal.strIngredient12?.let {
-                    Ingredients(
-                        ingredients = it,
-                        amount = meal.strMeasure12
-                    )
+                    meal.strMeasure12?.let { it1 ->
+                        Ingredients(
+                            ingredients = it,
+                            amount = it1
+                        )
+                    }
                 }
                 meal.strIngredient13?.let {
-                    Ingredients(
-                        ingredients = it,
-                        amount = meal.strMeasure13
-                    )
+                    meal.strMeasure13?.let { it1 ->
+                        Ingredients(
+                            ingredients = it,
+                            amount = it1
+                        )
+                    }
                 }
                 meal.strIngredient14?.let {
-                    Ingredients(
-                        ingredients = it,
-                        amount = meal.strMeasure14
-                    )
+                    meal.strMeasure14?.let { it1 ->
+                        Ingredients(
+                            ingredients = it,
+                            amount = it1
+                        )
+                    }
                 }
                 meal.strIngredient15?.let {
-                    Ingredients(
-                        ingredients = it,
-                        amount = meal.strMeasure15
-                    )
+                    meal.strMeasure15?.let { it1 ->
+                        Ingredients(
+                            ingredients = it,
+                            amount = it1
+                        )
+                    }
                 }
                 meal.strIngredient16?.let {
                     meal.strMeasure16?.let { it1 ->
