@@ -1,9 +1,7 @@
 # Compose Multiplatform Application
 
 ##Screenshots
-<img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/1.png" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/2.png" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/3.png" />
-
-
+<img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/11.png" height="50%"/> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/22.png" height="50%" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/33.png" height="50%" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/44.png" height="50%" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/55.png" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots663.png" /><img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/77.png" />
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
