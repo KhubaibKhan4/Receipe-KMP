@@ -1,7 +1,8 @@
 # Compose Multiplatform Application
 
-##Screenshots
-<img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/11.png" height="50%" width="50%" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/22.png" height="50%" width="50%" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/33.png" height="50%" width="50%" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/44.png" height="50%" width="50%" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/55.png" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots663.png" /><img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/77.png" />
+## Screenshots
+<img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/11.png" width="200" height="400" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/22.png" width="200" height="400" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/33.png" width="200" height="400" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/44.png" width="200" height="400" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/55.png" width="200" height="400" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/66.png" width="200" height="400" /> <img src="https://github.com/KhubaibKhan4/Receipe-KMP/blob/master/screenshots/77.png" width="200" height="400" />
+
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
