@@ -275,4 +275,3 @@ fun Ingredients(ingredients: String, amount: String) {
 }
 
 
-

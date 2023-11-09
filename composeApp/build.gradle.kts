@@ -1,5 +1,6 @@
 
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin.Companion.kotlinNodeJsExtension
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -96,6 +97,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(compose.html.core)
+                implementation(libs.ktor.client.js)
             }
         }
 

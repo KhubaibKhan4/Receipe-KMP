@@ -135,7 +135,9 @@ internal fun App() = AppTheme {
             }
         }
 
-
+        if (OS.JS.isWindows){
+            Text("Welcome to JS")
+        }
 
         when (recipesState) {
             is RecipeState.Loading -> {

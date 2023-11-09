@@ -9,11 +9,11 @@ data class Meal(
     @SerialName("dateModified")
     val dateModified: String?,
     @SerialName("idMeal")
-    val idMeal: String,
+    val idMeal: String?,
     @SerialName("strArea")
-    val strArea: String,
+    val strArea: String?,
     @SerialName("strCategory")
-    val strCategory: String,
+    val strCategory: String?,
     @SerialName("strCreativeCommonsConfirmed")
     val strCreativeCommonsConfirmed: String?,
     @SerialName("strDrinkAlternate")
@@ -61,11 +61,11 @@ data class Meal(
     @SerialName("strIngredient9")
     val strIngredient9: String?,
     @SerialName("strInstructions")
-    val strInstructions: String,
+    val strInstructions: String?,
     @SerialName("strMeal")
-    val strMeal: String,
+    val strMeal: String?,
     @SerialName("strMealThumb")
-    val strMealThumb: String,
+    val strMealThumb: String?,
     @SerialName("strMeasure1")
     val strMeasure1: String?,
     @SerialName("strMeasure10")
@@ -111,5 +111,5 @@ data class Meal(
     @SerialName("strTags")
     val strTags: String?,
     @SerialName("strYoutube")
-    val strYoutube: String
+    val strYoutube: String?
 )
