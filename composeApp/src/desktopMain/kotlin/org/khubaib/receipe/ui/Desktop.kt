@@ -261,27 +261,33 @@ fun RightPanel(
                     Spacer(modifier = Modifier.width(48.dp))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                Image(
-                    painter = rememberImagePainter(
-                        url = meal.strMealThumb
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(220.dp)
-                        .clip(MaterialTheme.shapes.medium)
-                        .background(MaterialTheme.colorScheme.surface)
-                        .border(1.dp, Color.LightGray, MaterialTheme.shapes.medium)
-                        .padding(4.dp),
-                    contentScale = ContentScale.Crop,
-                )
+                meal.strMealThumb?.let {
+                    rememberImagePainter(
+                        url = it
+                    )
+                }?.let {
+                    Image(
+                        painter = it,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(220.dp)
+                            .clip(MaterialTheme.shapes.medium)
+                            .background(MaterialTheme.colorScheme.surface)
+                            .border(1.dp, Color.LightGray, MaterialTheme.shapes.medium)
+                            .padding(4.dp),
+                        contentScale = ContentScale.Crop,
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = meal.strMeal,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                meal.strMeal?.let {
+                    Text(
+                        text = it,
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Summary",
@@ -290,11 +296,13 @@ fun RightPanel(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = meal.strInstructions,
-                    fontSize = 18.sp,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                meal.strInstructions?.let {
+                    Text(
+                        text = it,
+                        fontSize = 18.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = "Ingredients",
@@ -303,8 +311,8 @@ fun RightPanel(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                meal?.strMeasure1?.let { meal?.strIngredient1?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
-                meal?.strIngredient2?.let { meal.strMeasure2?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+                meal.strMeasure1?.let { meal.strIngredient1?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
+                meal.strIngredient2?.let { meal.strMeasure2?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
                 meal.strMeasure3?.let { meal.strIngredient3?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
                 meal.strIngredient4?.let { meal.strMeasure4?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
                 meal.strMeasure5?.let { meal.strIngredient5?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }

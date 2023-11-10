@@ -6,9 +6,9 @@ compose = "1.5.1"
 androidx-appcompat = "1.6.1"
 androidx-activityCompose = "1.8.0"
 compose-uitooling = "1.5.4"
-libres = "1.1.8"
-voyager = "1.0.0-rc07"
-composeImageLoader = "1.6.8"
+libres = "1.2.0"
+voyager = "1.0.0-rc08"
+composeImageLoader = "1.7.0"
 napier = "2.6.1"
 buildConfig = "4.1.1"
 kotlinx-coroutines = "1.7.3"
@@ -17,13 +17,14 @@ gson = "2.10.1"
 composeIcons = "1.1.0"
 kotlinx-serialization = "1.6.0"
 kotlinx-datetime = "0.4.1"
-multiplatformSettings = "1.0.0"
+multiplatformSettings = "1.1.0"
 
 [libraries]
 
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-uitooling" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 ktor-client-cio-jvm = { module = "io.ktor:ktor-client-cio.jvm", version.ref = "ktor" }
 ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 libres = { module = "io.github.skeptick.libres:libres-compose", version.ref = "libres" }

@@ -1,6 +1,4 @@
-
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin.Companion.kotlinNodeJsExtension
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -61,10 +59,9 @@ kotlin {
                 implementation(libs.io.ktor.client.content.negotiation)
                 implementation(libs.com.google.code.gson)
                 implementation(libs.io.ktor.ktor.client.serialization)
-                api("moe.tlaster:precompose:1.5.5")
-                api("moe.tlaster:precompose-viewmodel:1.5.5")
-                implementation("org.jetbrains.skiko:skiko:0.7.84")
-
+                api("moe.tlaster:precompose:1.5.6")
+                api("moe.tlaster:precompose-viewmodel:1.5.6")
+                implementation("org.jetbrains.skiko:skiko:0.7.85")
 
 
             }
@@ -97,7 +94,6 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(compose.html.core)
-                implementation(libs.ktor.client.js)
             }
         }
 
@@ -133,7 +129,7 @@ android {
 
     //Included due to Application crashes
     packagingOptions {
-        exclude ("META-INF/versions/9/previous-compilation-data.bin")
+        exclude("META-INF/versions/9/previous-compilation-data.bin")
     }
 }
 
