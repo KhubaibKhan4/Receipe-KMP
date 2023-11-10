@@ -53,7 +53,7 @@ import kotlin.math.absoluteValue
 @Composable
 fun TopSlider(
     meal: Recipes,
-    scope: CoroutineScope,
+    scope: CoroutineScope
 ) {
     var isDark by LocalThemeIsDark.current
     val state =
@@ -78,7 +78,7 @@ fun TopSlider(
             modifier = Modifier.padding(8.dp),
             dotSize = 8.dp,
             selectedDotColor = Color.Red,
-            unselectedDotColor =if (isDark) Color.White else Color.DarkGray
+            unselectedDotColor = if (isDark) Color.White else Color.DarkGray
         )
         // Automatic slide every 200 milliseconds
         LaunchedEffect(state.currentPage) {
@@ -124,7 +124,6 @@ fun TopSliderItem(
             .offset(x = offsetX)
             .scale(scaleX = scaleFactor, scaleY = scaleFactor)
             .clickable {
-
             }
     ) {
 

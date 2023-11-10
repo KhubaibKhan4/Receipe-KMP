@@ -49,7 +49,9 @@ import org.khubaib.receipe.data.model.Recipes
 import org.khubaib.receipe.openUrl
 
 @Composable
-fun RecipeList(recipes: Recipes) {
+fun RecipeList(
+    recipes: Recipes,
+) {
     val state = rememberLazyListState()
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -77,6 +79,9 @@ fun RecipeItem(recipe: Meal) {
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
+                .clickable {
+
+                }
                 .height(200.dp)
                 .shadow(elevation = 4.dp, shape = RectangleShape),
             contentScale = ContentScale.Crop,
@@ -121,21 +126,126 @@ fun RecipeItem(recipe: Meal) {
         if (extended) {
             Spacer(modifier = Modifier.height(24.dp))
 
-            recipe.strIngredient1?.let { recipe.strMeasure1?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strIngredient2?.let { recipe.strMeasure2?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strMeasure3?.let { recipe.strIngredient3?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
-            recipe.strIngredient4?.let { recipe.strMeasure4?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strMeasure5?.let { recipe.strIngredient5?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
-            recipe.strMeasure6?.let { recipe.strIngredient6?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
-            recipe.strIngredient7?.let { recipe.strMeasure7?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strMeasure8?.let { recipe.strIngredient8?.let { it1 -> Ingredients(ingredients = it1, amount = it) } }
-            recipe.strIngredient9?.let { recipe.strMeasure9?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strIngredient10?.let { recipe.strMeasure10?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strIngredient11?.let { recipe.strMeasure11?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strIngredient12?.let { recipe.strMeasure12?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strIngredient13?.let { recipe.strMeasure13?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strIngredient14?.let { recipe.strMeasure14?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
-            recipe.strIngredient15?.let { recipe.strMeasure15?.let { it1 -> Ingredients(ingredients = it, amount = it1) } }
+            recipe.strIngredient1?.let {
+                recipe.strMeasure1?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strIngredient2?.let {
+                recipe.strMeasure2?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strMeasure3?.let {
+                recipe.strIngredient3?.let { it1 ->
+                    Ingredients(
+                        ingredients = it1,
+                        amount = it
+                    )
+                }
+            }
+            recipe.strIngredient4?.let {
+                recipe.strMeasure4?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strMeasure5?.let {
+                recipe.strIngredient5?.let { it1 ->
+                    Ingredients(
+                        ingredients = it1,
+                        amount = it
+                    )
+                }
+            }
+            recipe.strMeasure6?.let {
+                recipe.strIngredient6?.let { it1 ->
+                    Ingredients(
+                        ingredients = it1,
+                        amount = it
+                    )
+                }
+            }
+            recipe.strIngredient7?.let {
+                recipe.strMeasure7?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strMeasure8?.let {
+                recipe.strIngredient8?.let { it1 ->
+                    Ingredients(
+                        ingredients = it1,
+                        amount = it
+                    )
+                }
+            }
+            recipe.strIngredient9?.let {
+                recipe.strMeasure9?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strIngredient10?.let {
+                recipe.strMeasure10?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strIngredient11?.let {
+                recipe.strMeasure11?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strIngredient12?.let {
+                recipe.strMeasure12?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strIngredient13?.let {
+                recipe.strMeasure13?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strIngredient14?.let {
+                recipe.strMeasure14?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
+            recipe.strIngredient15?.let {
+                recipe.strMeasure15?.let { it1 ->
+                    Ingredients(
+                        ingredients = it,
+                        amount = it1
+                    )
+                }
+            }
             recipe.strIngredient16?.let {
                 recipe.strMeasure16?.let { it1 ->
                     Ingredients(
