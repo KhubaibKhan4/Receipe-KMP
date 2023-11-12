@@ -47,22 +47,43 @@ import org.khubaib.receipe.ui.components.RecipeList
 import org.khubaib.receipe.ui.components.TopSlider
 import org.khubaib.receipe.util.RecipeState
 import org.khubaib.receipe.viewmodel.MainViewModel
+/*
+Android + iOS + Desktop + Web is ready
+Developed By
 
+Muhammad Khubaib Imtiaz
+
+For Collaboration or Freelance Contact Below
+Email: 18.bscs.803@gmailc.om
+Github: @KhubaibKhan4
+Linkedin: @KhubaibKhanDev
+
+ */
 @Composable
 internal fun App() = AppTheme {
 
-
+    //Coroutine Scope
     val scope = rememberCoroutineScope()
+    //Search Text
     var text by remember {
         mutableStateOf("")
     }
+    //Search State Management
     var isSearch by remember { mutableStateOf(false) }
+
+    //Recipe Data State Management
     var isRecipeData by remember { mutableStateOf(false) }
+
+    //Repository for Fetching Data
     val repository = Repository()
+
+    //ViewModel for KMP
     val viewModel = MainViewModel(repository)
 
+    // RecipeState Management
     var recipesState by remember { mutableStateOf<RecipeState>(RecipeState.Loading) }
 
+    //For Recipe Results
     LaunchedEffect(isRecipeData) {
         viewModel.getRandomRecipes()
 
@@ -71,6 +92,7 @@ internal fun App() = AppTheme {
         }
     }
 
+    //For Search Results
     LaunchedEffect(isSearch) {
         viewModel.getSearchRecipes(text)
 
@@ -90,6 +112,8 @@ internal fun App() = AppTheme {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        /*Condition for Displaying the Content
+        Only for Android OS*/
         if (OS.Android == OS.Android) {
 
             Row(
@@ -136,8 +160,10 @@ internal fun App() = AppTheme {
         }
 
 
-
+        //Recipe State
         when (recipesState) {
+
+            //Loading State Management
             is RecipeState.Loading -> {
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -147,6 +173,7 @@ internal fun App() = AppTheme {
                 }
             }
 
+            //Success State Management
             is RecipeState.Success -> {
                 val recipes = (recipesState as RecipeState.Success).recipes
                 Column(
@@ -161,6 +188,7 @@ internal fun App() = AppTheme {
                 }
             }
 
+            //Error State Management
             is RecipeState.Error -> {
                 val error = (recipesState as RecipeState.Error).error
                 Column(
